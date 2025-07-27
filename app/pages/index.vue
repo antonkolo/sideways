@@ -1,0 +1,103 @@
+<script setup lang="ts">
+import type { FormSubmitEvent } from '@nuxt/ui';
+import * as z from 'zod';
+
+// Zod schema for form validation
+const schema = z.object({
+  phoneNumber: z
+    .string()
+    .min(1, 'Phone number is required')
+    .regex(/^\+?[\d\s\-\(\)]{10,}$/, 'Please enter a valid phone number'),
+  email: z.string().email('Please enter a valid email address'),
+  agreedToNotifications: z.boolean().refine((val) => val === true, 'You must agree to receive notifications'),
+});
+
+type Schema = z.output<typeof schema>;
+
+const state = reactive<Partial<Schema>>({
+  phoneNumber: '',
+  email: '',
+  agreedToNotifications: false,
+});
+
+const toast = useToast();
+
+async function onSubmit(event: FormSubmitEvent<Schema>) {
+  try {
+    const response = await $fetch('/api/guests', {
+      method: 'POST',
+      body: {
+        phoneNumber: event.data.phoneNumber,
+        email: event.data.email,
+        agreedToNotifications: event.data.agreedToNotifications,
+      },
+    });
+
+    if (!response?.success) {
+      toast.add({
+        title: 'Error',
+        description: 'You are already subscribed to our events.',
+        color: 'warning',
+        icon: 'i-heroicons-exclamation-circle  ',
+      });
+      return;
+    }
+
+    // Show success message
+    toast.add({
+      title: 'Success!',
+      description: 'Information saved successfully! You will receive updates about upcoming Sideways events.',
+      color: 'success',
+    });
+
+    // Reset form
+    state.phoneNumber = '';
+    state.email = '';
+    state.agreedToNotifications = false;
+  } catch (error: any) {
+    console.error('Error saving information:', error);
+    toast.add({
+      title: 'Error',
+      description: 'There was an error saving your information. Please try again.',
+      color: 'error',
+    });
+  }
+}
+</script>
+
+<template>
+  <div class="min-h-screen bg-gradient-to-br from-brand-50 to-brand-100 flex items-center justify-center p-4">
+    <div class="mx-auto flex flex-col items-center justify-center max-w-md">
+      <img src="~/assets/svg/sideways.svg" alt="Sideways Logo" class="h-full object-contain" />
+      <h1 class="text-xl text-center mb-4">Receive updates about upcoming Sideways events</h1>
+      <UForm :schema="schema" :state="state" @submit="onSubmit">
+        <!-- Phone Number Field -->
+        <UFormField label="Phone Number" name="phoneNumber" required>
+          <UInput v-model="state.phoneNumber" type="tel" placeholder="+1 (555) 123-4567" icon="i-heroicons-phone" />
+        </UFormField>
+
+        <!-- Email Field (Optional) -->
+        <UFormField label="Email (Optional)" name="email">
+          <UInput v-model="state.email" type="email" placeholder="Your email" icon="i-heroicons-envelope" />
+        </UFormField>
+
+        <!-- Agreement Checkbox -->
+        <UFormField name="agreedToNotifications">
+          <UCheckbox
+            v-model="state.agreedToNotifications"
+            label="I agree to receive information about upcoming Sideways events"
+            required
+          />
+        </UFormField>
+
+        <!-- Submit Button -->
+        <UButton type="submit" loading-icons="i-heroicons-check" size="lg" variant="solid" color="primary">
+          Subscribe
+        </UButton>
+      </UForm>
+      <div class="text-center mt-6">
+        <p class="text-sm text-brand-500">By signing up, you'll receive SMS notifications about our events</p>
+      </div>
+    </div>
+  </div>
+</template>
