@@ -17,12 +17,12 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'cloudflare-pages',
     experimental: {
-      wasm: true
-    }
+      wasm: true,
+    },
   },
   app: {
     baseURL: '/',
     buildAssetsDir: '/_nuxt/',
-    cdnURL: ''
-  }
+    cdnURL: '',
+  },
 });
