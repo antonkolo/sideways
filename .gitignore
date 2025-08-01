@@ -1,16 +1,17 @@
-# Nuxt dev/build outputs
-.output
-.data
+# Nuxt devtools
+.nuxt/devtools
+.nuxt/devtools-host
+.nuxt/devtools-client
+
+# Nuxt build output
 .nuxt
-.nitro
-.cache
+.output
 dist
 
 # Node dependencies
 node_modules
 
 # Logs
-logs
 *.log
 
 # Misc
@@ -22,3 +23,6 @@ logs
 .env
 .env.*
 !.env.example
+
+# Cloudflare
+.wrangler

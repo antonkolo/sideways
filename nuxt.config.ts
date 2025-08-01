@@ -14,4 +14,15 @@ export default defineNuxtConfig({
     serviceKey: process.env.SUPABASE_SERVICE_KEY,
     redirect: false,
   },
+  nitro: {
+    preset: 'cloudflare-pages',
+    experimental: {
+      wasm: true
+    }
+  },
+  app: {
+    baseURL: '/',
+    buildAssetsDir: '/_nuxt/',
+    cdnURL: ''
+  }
 });
