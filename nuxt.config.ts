@@ -7,12 +7,7 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  modules: [
-    '@nuxt/ui',
-    '@nuxt/image',
-    '@nuxtjs/supabase',
-    'nuxt-auth-utils',
-  ],
+  modules: ['@nuxt/ui', '@nuxt/image', '@nuxtjs/supabase', 'nuxt-auth-utils'],
   supabase: {
     url: process.env.SUPABASE_URL,
     key: process.env.SUPABASE_ANON_KEY,

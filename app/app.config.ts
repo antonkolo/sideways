@@ -1,12 +1,18 @@
 export default defineAppConfig({
   ui: {
+    colors: {
+      primary: '',
+    },
     button: {
       slots: {
-        base: 'rounded-none',
+        base: 'rounded-none cursor-pointer',
       },
       variants: {
         size: {
-          lg: '',
+          lg: {
+            base: 'px-4 py-2',
+            leadingIcon: 'size-8',
+          },
         },
         color: {
           primary: '',
@@ -18,17 +24,22 @@ export default defineAppConfig({
           color: 'primary',
           class: 'bg-black hover:bg-white hover:text-black border-black border-1',
         },
+        {
+          variant: 'link',
+          color: 'primary',
+          class: 'text-white bg-none',
+        },
       ],
     },
     container: {
       base: 'w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8',
     },
     form: {
-      base: 'border-black border p-4 min-w-md',
+      base: 'border-black sm:border p-4 flex flex-col gap-4',
     },
     input: {
       slots: {
-        root: 'relative inline-flex items-center',
+        root: 'relative inline-flex items-center w-full',
         base: [
           'w-full rounded-none border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75',
           'transition-colors',
