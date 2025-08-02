@@ -39,7 +39,7 @@ export default defineAppConfig({
     },
     input: {
       slots: {
-        root: 'relative inline-flex items-center w-full',
+        root: 'relative inline-flex font-normal items-center w-full',
         base: [
           'w-full rounded-none border-0 placeholder:text-dimmed focus:outline-none disabled:cursor-not-allowed disabled:opacity-75',
           'transition-colors',

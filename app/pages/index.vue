@@ -97,7 +97,9 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           </UButton>
         </UForm>
 
-        <p class="text-sm mt-2">* By signing up, you agree to receive SMS notifications about our events</p>
+        <p class="text-dimmed text-center md:text-left text-sm md:mt-2">
+          * By signing up, you agree to receive SMS notifications about our events
+        </p>
       </div>
     </div>
   </div>
