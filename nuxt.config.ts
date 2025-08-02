@@ -11,9 +11,6 @@ export default defineNuxtConfig({
   supabase: {
     redirect: false,
   },
-  nitro: {
-    preset: 'cloudflare_pages',
-  },
   app: {
     baseURL: '/',
     buildAssetsDir: '/_nuxt/',
