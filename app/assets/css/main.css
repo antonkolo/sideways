@@ -76,10 +76,6 @@
 @theme static {
   --font-sans: 'Neue Montreal', sans-serif;
   --ui-container: 1200px;
-}
 
-@layer base {
-  body {
-    @apply text-black font-sans;
-  }
+  --ui-text: #151515;
 }
