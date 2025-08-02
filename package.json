@@ -20,7 +20,6 @@
     "@types/bcryptjs": "^3.0.0",
     "bcryptjs": "^3.0.2",
     "nuxt": "^4.0.1",
-    "nuxt-auth-utils": "0.5.20",
     "tailwindcss": "^4.1.11",
     "twilio": "^5.8.0",
     "vue": "^3.5.17",
