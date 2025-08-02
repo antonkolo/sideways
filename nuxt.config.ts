@@ -7,17 +7,12 @@ export default defineNuxtConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  modules: [
-    '@nuxt/ui',
-    '@nuxt/image',
-    '@nuxtjs/supabase',
-    '@nuxthub/core',
-  ],
+  modules: ['@nuxt/ui', '@nuxt/image', '@nuxtjs/supabase', '@nuxthub/core'],
   supabase: {
     redirect: false,
   },
   nitro: {
-    preset: 'netlify',
+    preset: 'cloudflare_pages',
   },
   app: {
     baseURL: '/',
