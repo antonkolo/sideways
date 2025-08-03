@@ -16,7 +16,4 @@ export default defineNuxtConfig({
     buildAssetsDir: '/_nuxt/',
     cdnURL: '',
   },
-  colorMode: {
-    preference: 'light',
-  },
 });

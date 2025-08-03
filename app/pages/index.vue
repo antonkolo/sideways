@@ -66,6 +66,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
+  <Header />
   <div class="mx-auto max-w-2xl">
     <div class="min-h-screen bg-gradient-to-br from-brand-50 to-brand-100 flex items-center justify-center lg:p-4">
       <div class="mx-auto flex flex-col items-center justify-center max-w-md gap-2">
