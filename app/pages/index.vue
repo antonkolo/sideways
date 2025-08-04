@@ -20,6 +20,7 @@ const state = reactive<Partial<Schema>>({
 type Schema = z.output<typeof schema>;
 
 const toast = useToast();
+const isBlurred = ref(false);
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   try {
@@ -45,7 +46,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     // Show success message
     toast.add({
       title: 'Success!',
-      description: 'Information saved successfully! You will receive updates about upcoming Sideways events.',
+      description: 'Information saved successfully! You will receive updates about upcoming sideways events.',
       color: 'success',
     });
 
@@ -69,8 +70,14 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
   <div class="mx-auto max-w-2xl">
     <div class="min-h-screen bg-gradient-to-br from-brand-50 to-brand-100 flex items-center justify-center lg:p-4">
       <div class="mx-auto flex flex-col items-center justify-center max-w-md gap-2">
-        <img src="~/assets/svg/sideways.svg" alt="Sideways Logo" class="h-full" />
-        <h1 class="text-md text-center mb-2">Receive updates about upcoming Sideways events</h1>
+        <img
+          src="~/assets/svg/sideways.svg"
+          alt="Sideways Logo"
+          :class="isBlurred ? 'blur-xs' : 'blur-none'"
+          class="cursor-pointer transition-all duration-300"
+          @click="isBlurred = !isBlurred"
+        />
+        <h1 class="text-md text-center mb-2">early infos & community specials</h1>
         <UForm :schema="schema" :state="state" @submit="onSubmit" class="bg-white">
           <!-- Phone Number Field -->
           <UFormField label="Phone Number" name="phoneNumber" required>

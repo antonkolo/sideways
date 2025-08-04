@@ -73,7 +73,7 @@
   font-display: swap;
 }
 
-@theme static {
+@theme {
   --font-sans: 'Neue Montreal', sans-serif;
   --ui-container: 1200px;
 
