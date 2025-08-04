@@ -7,19 +7,16 @@ interface Database {
         Row: {
           id: string;
           phone_number: string;
-          email: string | null;
           created_at: string;
         };
         Insert: {
           id?: string;
           phone_number: string;
-          email?: string | null;
           created_at?: string;
         };
         Update: {
           id?: string;
           phone_number?: string;
-          email?: string | null;
           created_at?: string;
         };
       };
@@ -31,7 +28,7 @@ export default defineEventHandler(async (event) => {
   try {
     const body = await readBody(event);
 
-    const { phoneNumber, email } = body;
+    const { phoneNumber } = body;
 
     const client = serverSupabaseServiceRole<Database>(event);
 
@@ -60,7 +57,6 @@ export default defineEventHandler(async (event) => {
     // Add new guest to database
     const guestData = {
       phone_number: phoneNumber,
-      email: email || null,
     };
 
     const { data: newGuest, error } = await client.from('guests').insert(guestData).select().single();

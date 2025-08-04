@@ -7,13 +7,12 @@ const schema = z.object({
     .string()
     .min(1, 'Phone number is required')
     .regex(/^\+?[\d\s\-\(\)]{10,}$/, 'Please enter a valid phone number'),
-  email: z.email('Please enter a valid email address'),
+
   agreedToNotifications: z.boolean().refine((val) => val === true, 'You must agree to receive notifications'),
 });
 
 const state = reactive<Partial<Schema>>({
   phoneNumber: '',
-  email: '',
   agreedToNotifications: false,
 });
 
@@ -28,7 +27,6 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       method: 'POST',
       body: {
         phoneNumber: event.data.phoneNumber,
-        email: event.data.email,
         agreedToNotifications: event.data.agreedToNotifications,
       },
     });
@@ -52,7 +50,6 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
     // Reset form
     state.phoneNumber = '';
-    state.email = '';
     state.agreedToNotifications = false;
   } catch (error: any) {
     console.error('Error saving information:', error);
@@ -77,23 +74,18 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           class="cursor-pointer transition-all duration-300"
           @click="isBlurred = !isBlurred"
         />
-        <h1 class="text-md text-center mb-2">early infos & community specials</h1>
-        <UForm :schema="schema" :state="state" @submit="onSubmit">
+        <h1 class="text-md text-center -mt-1 mb-2 sm:mb-4 italic">early infos & community specials</h1>
+        <UForm :schema="schema" :state="state" @submit="onSubmit" class="flex flex-col border rounded-sm py-8 px-4">
           <!-- Phone Number Field -->
-          <UFormField label="Phone Number" name="phoneNumber" required>
+          <UFormField label="Phone Number" name="phoneNumber" required class="w-full mb-6">
             <UInput v-model="state.phoneNumber" type="tel" placeholder="+43 681 123 4567" icon="i-heroicons-phone" />
           </UFormField>
 
-          <!-- Email Field (Optional) -->
-          <UFormField label="Email (Optional)" name="email">
-            <UInput v-model="state.email" type="email" placeholder="Your email" icon="i-heroicons-envelope" />
-          </UFormField>
-
           <!-- Agreement Checkbox -->
-          <UFormField name="agreedToNotifications">
+          <UFormField name="agreedToNotifications" class="mb-4">
             <UCheckbox
               v-model="state.agreedToNotifications"
-              label="I agree to receive information about upcoming Sideways events"
+              label="I agree to receive information about upcoming sideways events"
               required
             />
           </UFormField>
