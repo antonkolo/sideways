@@ -75,7 +75,12 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
           @click="isBlurred = !isBlurred"
         />
         <h1 class="text-md text-center -mt-1 mb-2 sm:mb-4 italic">early infos & community specials</h1>
-        <UForm :schema="schema" :state="state" @submit="onSubmit" class="flex flex-col border rounded-sm py-8 px-4">
+        <UForm
+          :schema="schema"
+          :state="state"
+          @submit="onSubmit"
+          class="flex flex-col sm:border border-neutral-400 py-8 px-4"
+        >
           <!-- Phone Number Field -->
           <UFormField label="Phone Number" name="phoneNumber" required class="w-full mb-6">
             <UInput v-model="state.phoneNumber" type="tel" placeholder="+43 681 123 4567" icon="i-heroicons-phone" />
