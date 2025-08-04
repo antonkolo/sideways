@@ -7,6 +7,8 @@
 
 .dark {
   --ui-primary: white;
+  --ui-text: white;
+  --ui-background: black;
 }
 
 @font-face {

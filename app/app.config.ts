@@ -35,7 +35,7 @@ export default defineAppConfig({
       base: 'w-full max-w-(--ui-container) mx-auto px-4 sm:px-6 lg:px-8',
     },
     form: {
-      base: 'border-black sm:border p-4 flex flex-col gap-4',
+      base: 'bg-white dark:bg-black dark:border-white border-black sm:border p-4 flex flex-col gap-4',
     },
     input: {
       slots: {
